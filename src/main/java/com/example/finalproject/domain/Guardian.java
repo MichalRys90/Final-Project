@@ -18,7 +18,7 @@ public class Guardian {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     @Column(name = "GUARDIAN_ID", unique = true)
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")

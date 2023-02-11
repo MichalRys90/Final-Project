@@ -6,25 +6,32 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "GUARDIANS")
-public class UserRole {
+@Table(name = "MEDICINES")
+public class Medicines {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    @Column(name = "USER_ROLE_ID", unique = true)
+    @Column(name = "MEDICINES_ID", unique = true)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "GUARDIAN_ID")
-    private Guardian guardian;
+    @Column(name = "PRICE")
+    private BigDecimal price;
+
+    @Column
+    private String name;
+
+    @Column
+    private int quantity;
 
     @ManyToOne
     @JoinColumn(name = "PATIENT_ID")
     private Patient patient;
+
 }

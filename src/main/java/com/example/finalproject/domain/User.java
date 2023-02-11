@@ -22,7 +22,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     @Column(name = "USER_ID", unique = true)
-    private Long userId;
+    private long userId;
 
     @Column(name = "USERNAME", unique = true)
     private String username;
@@ -32,6 +32,9 @@ public class User {
 
     @Column(name = "PASSWORD")
     private String password;
+
+    @Column(name = "MAIL")
+    private String mail;
 
     @Column(name="GUARDIANS")
     @OneToMany(targetEntity = Guardian.class,

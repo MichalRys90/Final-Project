@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -20,7 +22,7 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     @Column(name = "PATIENT_ID", unique = true)
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
@@ -33,4 +35,12 @@ public class Patient {
             orphanRemoval = true,
             fetch = FetchType.LAZY)
     private Set<UserRole> guardians = new HashSet<>();
+
+    @Column(name="MEDICINES")
+    @OneToMany(targetEntity = Medicines.class,
+            mappedBy = "patient",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY)
+    private List<Medicines> medicinesList = new ArrayList<>();
 }
