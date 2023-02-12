@@ -2,14 +2,13 @@ package com.example.finalproject.mapper;
 
 import com.example.finalproject.domain.Patient;
 import com.example.finalproject.domain.dto.PatientDto;
-import com.example.finalproject.repository.PatientRepository;
+import com.example.finalproject.exception.UserWithGivenIdDoesntExist;
 import com.example.finalproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,9 +29,8 @@ public class PatientMapper {
                 medicinesMapper.mapToMedicinesDtoList(patient.getMedicinesList()));
     }
 
-    public Patient mapToPatient(final PatientDto patientDto) throws Exception {
-        return new Patient(patientDto.getId(),
-                userRepository.findById(patientDto.getUserId()).orElseThrow(Exception::new),
+    public Patient mapToPatient(final PatientDto patientDto) throws UserWithGivenIdDoesntExist {
+        return new Patient(userRepository.findById(patientDto.getUserId()).orElseThrow(UserWithGivenIdDoesntExist::new),
                 new HashSet<>(),
                 new ArrayList<>());
     }

@@ -27,6 +27,12 @@ public class User {
     @Column(name = "USERNAME", unique = true)
     private String username;
 
+    @Column(name = "FIRSTNAME")
+    private String firstname;
+
+    @Column(name = "LASTNAME")
+    private String lastname;
+
     @Column(name = "USERKEY")
     private String userKey;
 
@@ -51,4 +57,15 @@ public class User {
             orphanRemoval = true,
             fetch = FetchType.LAZY)
     private Set<Patient> patients = new HashSet<>();
+
+    public User(String username, String firstname, String lastname, String userKey, String password, String mail, Set<Guardian> guardians, Set<Patient> patients) {
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.userKey = userKey;
+        this.password = password;
+        this.mail = mail;
+        this.guardians = guardians;
+        this.patients = patients;
+    }
 }

@@ -28,7 +28,7 @@ public class Patient {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @Column(name="GUARDIANS")
+    @Column(name="PATIENTS")
     @OneToMany(targetEntity = UserRole.class,
             mappedBy = "patient",
             cascade = CascadeType.ALL,
@@ -43,4 +43,10 @@ public class Patient {
             orphanRemoval = true,
             fetch = FetchType.LAZY)
     private List<Medicines> medicinesList = new ArrayList<>();
+
+    public Patient(User user, Set<UserRole> guardians, List<Medicines> medicinesList) {
+        this.user = user;
+        this.guardians = guardians;
+        this.medicinesList = medicinesList;
+    }
 }

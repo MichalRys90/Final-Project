@@ -2,6 +2,7 @@ package com.example.finalproject.mapper;
 
 import com.example.finalproject.domain.Medicines;
 import com.example.finalproject.domain.dto.MedicinesDto;
+import com.example.finalproject.exception.PatientWithGivenIdDoesntExist;
 import com.example.finalproject.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,12 +24,12 @@ public class MedicinesMapper {
                 medicines.getPatient().getId());
     }
 
-    public Medicines mapToMedicines(final MedicinesDto medicinesDto) throws Exception {
+    public Medicines mapToMedicines(final MedicinesDto medicinesDto) throws PatientWithGivenIdDoesntExist {
         return new Medicines(medicinesDto.getId(),
                 medicinesDto.getPrice(),
                 medicinesDto.getName(),
                 medicinesDto.getQuantity(),
-                patientRepository.findById(medicinesDto.getPatientId()).orElseThrow(Exception::new));
+                patientRepository.findById(medicinesDto.getPatientId()).orElseThrow(PatientWithGivenIdDoesntExist::new));
     }
 
     public List<MedicinesDto> mapToMedicinesDtoList(final List<Medicines> medicines){

@@ -26,10 +26,14 @@ public class Guardian {
 
     @Column(name="GUARDIANS")
     @OneToMany(targetEntity = UserRole.class,
-            mappedBy = "patient",
+            mappedBy = "guardian",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.LAZY)
-    private Set<UserRole> guardians = new HashSet<>();
+    private Set<UserRole> patients = new HashSet<>();
 
+    public Guardian(User user, Set<UserRole> guardians) {
+        this.user = user;
+        this.patients = guardians;
+    }
 }
