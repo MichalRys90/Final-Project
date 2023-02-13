@@ -1,5 +1,7 @@
 package com.example.finalproject.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,11 +21,11 @@ public class Guardian {
     @NotNull
     @Column(name = "GUARDIAN_ID", unique = true)
     private long id;
-
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
-
+    @JsonManagedReference
     @Column(name="GUARDIANS")
     @OneToMany(targetEntity = UserRole.class,
             mappedBy = "guardian",

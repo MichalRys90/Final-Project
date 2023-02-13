@@ -1,9 +1,7 @@
 package com.example.finalproject.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -41,7 +39,9 @@ public class User {
 
     @Column(name = "MAIL")
     private String mail;
-
+    @JsonBackReference
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @Column(name="GUARDIANS")
     @OneToMany(targetEntity = Guardian.class,
             mappedBy = "user",
@@ -49,7 +49,9 @@ public class User {
             orphanRemoval = true,
             fetch = FetchType.LAZY)
     private Set<Guardian> guardians = new HashSet<>();
-
+    @JsonBackReference
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @Column(name="PATIENTS")
     @OneToMany(targetEntity = Patient.class,
             mappedBy = "user",

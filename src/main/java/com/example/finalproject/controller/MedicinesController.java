@@ -5,7 +5,6 @@ import com.example.finalproject.domain.dto.MedicinesDto;
 import com.example.finalproject.exception.PatientWithGivenIdDoesntExist;
 import com.example.finalproject.mapper.MedicinesMapper;
 import com.example.finalproject.service.MedicinesDbService;
-import com.example.finalproject.service.UserRoleDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

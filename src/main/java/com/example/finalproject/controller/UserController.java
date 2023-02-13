@@ -48,4 +48,10 @@ public class UserController {
         userRepository.save(user);
         return ResponseEntity.ok(generateUserKey);
     }
+
+    @DeleteMapping(value = "removeUser/{userId}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
+        userRepository.deleteById(userId);
+        return ResponseEntity.ok().build();
+    }
 }

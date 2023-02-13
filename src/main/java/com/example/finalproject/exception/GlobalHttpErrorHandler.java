@@ -39,4 +39,14 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleGuardianExist(GuardianExist exception) {
         return new ResponseEntity<>("The guardian already exists", HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(GuardianWithGivenIdDoesntExist.class)
+    public ResponseEntity<Object> handleGuardianWithGivenIdDoesntExist(GuardianWithGivenIdDoesntExist exception) {
+        return new ResponseEntity<>("Guardian with given id doesnt exist", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(PatientIsAlreadyAdded.class)
+    public ResponseEntity<Object> PatientIsAlreadyAddedException(PatientIsAlreadyAdded exception) {
+        return new ResponseEntity<>("Patient is already added", HttpStatus.BAD_REQUEST);
+    }
 }

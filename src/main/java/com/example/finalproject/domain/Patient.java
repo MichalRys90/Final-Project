@@ -1,5 +1,7 @@
 package com.example.finalproject.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,11 +25,12 @@ public class Patient {
     @NotNull
     @Column(name = "PATIENT_ID", unique = true)
     private long id;
-
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
 
+    @JsonManagedReference
     @Column(name="PATIENTS")
     @OneToMany(targetEntity = UserRole.class,
             mappedBy = "patient",
@@ -35,7 +38,7 @@ public class Patient {
             orphanRemoval = true,
             fetch = FetchType.LAZY)
     private Set<UserRole> guardians = new HashSet<>();
-
+    @JsonManagedReference
     @Column(name="MEDICINES")
     @OneToMany(targetEntity = Medicines.class,
             mappedBy = "patient",

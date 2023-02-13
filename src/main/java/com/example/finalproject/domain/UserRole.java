@@ -1,8 +1,7 @@
 package com.example.finalproject.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,11 +19,22 @@ public class UserRole {
     @Column(name = "USER_ROLE_ID", unique = true)
     private long id;
 
+    @JsonBackReference
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "GUARDIAN_ID")
     private Guardian guardian;
 
+    @JsonBackReference
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "PATIENT_ID")
     private Patient patient;
+
+    public UserRole(Guardian guardian, Patient patient) {
+        this.guardian = guardian;
+        this.patient = patient;
+    }
 }
